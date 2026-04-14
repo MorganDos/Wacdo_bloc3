@@ -27,11 +27,7 @@ Application React/Vite pour le sujet 2 du bloc 3 : rechercher une ville, affiche
 
 Les schémas du projet sont disponibles dans `docs/composants.png` et `docs/flux.png`.
 
-## Configuration
-
-Aucune variable d'environnement n'est nécessaire.
-
 ## URL
 
-- URL de l'application déployée :
+- URL de l'application déployée : https://wacdo-bloc3-14j2.vercel.app/
 - URL du dépôt public : https://github.com/MorganDos/Wacdo_bloc3
