@@ -58,7 +58,9 @@ const SearchComponent = ({ onCitySelected, onRestaurantsLoaded }) => {
   const [error, setError] = useState("");
 
   // Recherche les villes correspondant à la saisie de l'utilisateur.
-  const handleCitySearch = async () => {
+  const handleCitySearch = async (event) => {
+    event.preventDefault();
+
     const trimmedQuery = query.trim();
     if (!trimmedQuery) {
       setCityOptions([]);
@@ -138,8 +140,8 @@ const SearchComponent = ({ onCitySelected, onRestaurantsLoaded }) => {
   };
 
   return (
-    <section className="search-box">
-      <div className="search-row">
+    <section className="search-box" aria-label="Recherche de ville">
+      <form className="search-row" onSubmit={handleCitySearch}>
         <label htmlFor="city-search" className="sr-only">
           Rechercher une ville
         </label>
@@ -148,15 +150,16 @@ const SearchComponent = ({ onCitySelected, onRestaurantsLoaded }) => {
           type="text"
           placeholder="Rechercher une ville"
           value={query}
+          autoComplete="address-level2"
           onChange={(event) => setQuery(event.target.value)}
         />
-        <button type="button" onClick={handleCitySearch} disabled={loadingCities}>
-          {loadingCities ? "..." : "Rechercher"}
+        <button type="submit" disabled={loadingCities}>
+          {loadingCities ? "Recherche..." : "Rechercher"}
         </button>
-      </div>
+      </form>
 
       {cityOptions.length > 0 && (
-        <ul className="city-list" role="listbox" aria-label="Villes trouvées">
+        <ul className="city-list" aria-label="Villes trouvées">
           {cityOptions.map((city) => (
             <li key={city.id}>
               <button type="button" onClick={() => handleCityPick(city)} className="city-option">
@@ -167,8 +170,16 @@ const SearchComponent = ({ onCitySelected, onRestaurantsLoaded }) => {
         </ul>
       )}
 
-      {loadingRestaurants && <p className="search-feedback">Chargement des restaurants...</p>}
-      {error && <p className="search-feedback error">{error}</p>}
+      {loadingRestaurants && (
+        <p className="search-feedback" role="status">
+          Chargement des restaurants...
+        </p>
+      )}
+      {error && (
+        <p className="search-feedback error" role="alert">
+          {error}
+        </p>
+      )}
     </section>
   );
 };

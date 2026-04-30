@@ -48,7 +48,12 @@ function App() {
           onRestaurantsLoaded={handleRestaurantsLoaded}
         />
 
-        <section className="selection-overlay" aria-live="polite" data-testid="selection-overlay">
+        <section
+          className="selection-overlay"
+          aria-label="Restaurant sélectionné"
+          aria-live="polite"
+          data-testid="selection-overlay"
+        >
           {hasSelectedRestaurant ? (
             <>
               <p className="selection-heading">Restaurant sélectionné</p>
